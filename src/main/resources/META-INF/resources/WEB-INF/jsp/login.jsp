@@ -4,6 +4,7 @@
     </head>
     <body>
         <h2>hey there! Welcome to the login page</h2>
+        <pre>${error}</pre>
         <form method="POST">
             Name: <input type="text" name="name">
             Password: <input type="password" name="password">

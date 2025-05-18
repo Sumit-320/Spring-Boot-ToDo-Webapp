@@ -8,14 +8,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class Logincontroller {
+   
+    // constructor injection for wiring things/classes
+    // in order to inject authentication service spring uses @service annotation for service beans
+     private AuthenticationService authenticationService;
+     public Logincontroller(AuthenticationService authenticationService){
+        super();
+        this.authenticationService = authenticationService;
+     }
+
     @RequestMapping(value="login",method = RequestMethod.GET)
     public String goToLoginPage() {
         return "login";
     }
     @RequestMapping(value="login",method = RequestMethod.POST)
     public String goToWelcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
-        model.put("name",name);
-        model.put("password",password);
-        return "sayHello";
+        // authentication 
+        if(authenticationService.authenticate(name, password)){
+            model.put("name",name);
+            return "sayHello";
+        }
+        model.put("error","Invalid Credentials, Please try again!");
+        return "login";
     } 
 }

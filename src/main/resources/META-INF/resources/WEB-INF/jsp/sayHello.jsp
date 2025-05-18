@@ -5,6 +5,5 @@
     <body>
         <h2>hey there!</h2>
         <div>name: ${name}</div>
-        <div>password: ${password}</div>
     </body>
 </html>
