@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login to My First WebApp on Spring Boot</title>
@@ -74,10 +74,12 @@
 <body>
     <div class="login-container">
         <h2>Welcome to the Login Page</h2>
-        
-        <div class="error-message">${error}</div>
-        
-        <form method="POST">
+
+        <!-- Display error if present -->
+        <div class="error-message" th:if="${error}" th:text="${error}">Invalid login</div>
+
+        <!-- POST to /login (or your custom login URL) -->
+        <form th:action="@{/login}" method="post">
             <label for="name">Username</label>
             <input type="text" id="name" name="name" required>
 

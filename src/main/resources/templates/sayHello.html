@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome to my 1st boot webapp</title>
+</head>
+<body>
+    <h2>Hey there!</h2>
+    <div>Name: <span th:text="${name}">User</span></div>
+    <div><a th:href="@{/list-todos}">Manage</a> your todos</div>
+</body>
+</html>

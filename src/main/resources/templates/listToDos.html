@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome to my ToDo web application</title>
+</head>
+<body>
+    <h2>Here are your upcoming goals, Best of Luck!</h2>
+
+    <div>Welcome <span th:text="${name}">User</span></div>
+
+    <div>Your ToDo's are</div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Description</th>
+                <th>Target Date</th>
+                <th>Is Completed?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="todo : ${todos}">
+                <td th:text="${todo.id}">1</td>
+                <td th:text="${todo.description}">Sample Description</td>
+                <td th:text="${todo.targetdate}">2025-05-19</td>
+                <td th:text="${todo.done}">false</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

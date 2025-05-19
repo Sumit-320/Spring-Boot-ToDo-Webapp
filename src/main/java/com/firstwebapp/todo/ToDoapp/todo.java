@@ -1,6 +1,6 @@
 package com.firstwebapp.todo.ToDoapp;
 import java.time.LocalDate;
-public class todo {
+public class Todo {
     // id-username-targetdate-username-done
     private int id;
     private String username;
@@ -8,7 +8,7 @@ public class todo {
     private LocalDate targetdate;
     private boolean done;
     
-    public todo(int id, String username, String description, LocalDate targetdate, boolean done) {
+    public Todo(int id, String username, String description, LocalDate targetdate, boolean done) {
         super();
         this.id=id;
         this.username = username;

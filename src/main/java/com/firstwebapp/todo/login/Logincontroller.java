@@ -4,9 +4,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 @Controller
+@SessionAttributes("name") // we have to define sessAtrr in all class where we want to use it eg use in todocontroller
 public class Logincontroller {
    
     // constructor injection for wiring things/classes
