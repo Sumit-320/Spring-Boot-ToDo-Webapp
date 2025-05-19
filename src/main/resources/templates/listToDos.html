@@ -84,6 +84,7 @@
                         <th>Description</th>
                         <th>Target Date</th>
                         <th>Completed?</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,6 +93,7 @@
                         <td th:text="${todo.description}"></td>
                         <td th:text="${todo.targetdate}"></td>
                         <td th:text="${todo.done}"></td>
+                        <td><a th:href="@{'/delete-todo?id=' + ${todo.id}}" class="btn btn-warning">DELETE</a></td>
                     </tr>
                 </tbody>
             </table>
