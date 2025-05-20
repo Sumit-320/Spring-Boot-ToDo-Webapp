@@ -1,6 +1,7 @@
 package com.firstwebapp.todo.ToDoapp;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +34,7 @@ public class ToDoController {
         return "todo";
     }
 
+
     @RequestMapping(value="add-todo",method = RequestMethod.POST)
     public String AddToDoPage(@RequestParam String description,ModelMap model) {
         todoService.addToDo((String)model.get("name"), description, LocalDate.now().plusYears(1), false);
@@ -42,6 +44,19 @@ public class ToDoController {
     public String DeleteToDo(@RequestParam int id){
         // delete todo
         todoService.deleteToDo(id);
+        return "redirect:list-todos";
+    }
+    @RequestMapping(value = "update-todo", method =  RequestMethod.GET)
+    public String ShowUpdateToDo(@RequestParam int id,ModelMap model){
+        // delete todo
+        Todo todo = todoService.findById(id);
+        model.addAttribute("todo",todo);
+        return "todo";
+    }
+    @RequestMapping(value = "update-todo", method = RequestMethod.POST)
+    public String updateToDoPage(@ModelAttribute("todo") Todo todo, ModelMap model) {
+        String username = (String) model.get("name"); 
+        todoService.updateToDo(todo.getId(), username, todo.getDescription(), todo.getTargetdate(), todo.isDone());
         return "redirect:list-todos";
     }
 }

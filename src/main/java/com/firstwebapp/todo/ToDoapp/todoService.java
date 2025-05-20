@@ -26,8 +26,20 @@ public class TodoService {
         Todo todo = new Todo(++todosCount,username,description,targetdate,done);
         todos.add(todo); // appending the list
     } 
+    public void updateToDo(int id, String username, String description, LocalDate targetdate, boolean done) {
+        Todo todo = findById(id);
+        todo.setDescription(description);
+        todo.setTargetdate(targetdate);
+        todo.setDone(done);
+        todo.setUsername(username); // optional if username doesn't change
+    }
     public void deleteToDo(int id){
         Predicate<? super Todo>predicate = todo -> todo.getId() == id;
         todos.removeIf(predicate);
+    }
+    public Todo findById(int id){
+        Predicate<? super Todo>predicate = todo -> todo.getId() == id;
+        Todo todo = todos.stream().filter(predicate).findFirst().get();
+        return todo;
     }
 }

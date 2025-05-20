@@ -93,7 +93,10 @@
                         <td th:text="${todo.description}"></td>
                         <td th:text="${todo.targetdate}"></td>
                         <td th:text="${todo.done}"></td>
-                        <td><a th:href="@{'/delete-todo?id=' + ${todo.id}}" class="btn btn-warning">DELETE</a></td>
+                        <td><a th:href="@{'/delete-todo?id=' + ${todo.id}}" class="btn btn-warning">Delete</a>
+                            &nbsp&nbsp&nbsp
+                            <a th:href="@{'/update-todo?id=' + ${todo.id}}" class="btn btn-success">Update</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

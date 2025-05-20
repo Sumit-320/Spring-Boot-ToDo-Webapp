@@ -9,9 +9,30 @@
 
     <style>
         body {
-            background-color: #f3f4f6;
-            font-family: 'Segoe UI', sans-serif;
+            position: relative;
+            margin: 0;
             padding-top: 100px;
+            height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Blurred background image */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/images/bg-image.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: rgba(0, 0, 0, 0.1); /* darken effect */
+            background-blend-mode: darken;
+            filter: blur(8px);
+            z-index: -1;
         }
 
         .welcome-box {
@@ -22,6 +43,8 @@
             max-width: 600px;
             margin: auto;
             text-align: center;
+            position: relative;
+            z-index: 1; /* ensure above blur */
         }
 
         h2 {
@@ -51,14 +74,16 @@
         .manage-link:hover {
             background-color: #99004d;
             transform: scale(1.05);
-            color:white;
+            color: white;
         }
 
         .footer {
             text-align: center;
             margin-top: 40px;
             font-size: 0.9rem;
-            color: #777;
+            color: #eee;
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
@@ -69,7 +94,6 @@
         <a th:href="@{/list-todos}" class="manage-link">Manage Your ToDos</a>
     </div>
 
-    <div class="footer">© 2025 TaskBoard. Plan it. Do it.</div>
 
     <!-- Bootstrap JS -->
     <script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
