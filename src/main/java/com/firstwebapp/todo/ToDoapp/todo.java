@@ -31,6 +31,8 @@ public class Todo {
     public LocalDate getTargetdate() {
         return targetdate;
     }
+    public Todo() {
+    }
     public void setTargetdate(LocalDate targetdate) {
         this.targetdate = targetdate;
     }

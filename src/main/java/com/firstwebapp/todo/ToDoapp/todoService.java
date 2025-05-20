@@ -22,24 +22,25 @@ public class TodoService {
         return todos;
     }
 
-    public void addToDo(String username, String description, LocalDate targetdate,boolean done){
-        Todo todo = new Todo(++todosCount,username,description,targetdate,done);
-        todos.add(todo); // appending the list
-    } 
-    public void updateToDo(int id, String username, String description, LocalDate targetdate, boolean done) {
-        Todo todo = findById(id);
+    public void addToDo(String username, String description, LocalDate targetDate, boolean done) {
+        int newId = todos.stream().mapToInt(Todo::getId).max().orElse(0) + 1;
+        todos.add(new Todo(newId, username, description, targetDate, done));
+    }
+    public void updateToDo(int id, String username, String description, LocalDate targetDate, boolean done) {
+        Todo todo = findById(id); // throws exception if not found
         todo.setDescription(description);
-        todo.setTargetdate(targetdate);
+        todo.setTargetdate(targetDate);
         todo.setDone(done);
-        todo.setUsername(username); // optional if username doesn't change
     }
     public void deleteToDo(int id){
         Predicate<? super Todo>predicate = todo -> todo.getId() == id;
         todos.removeIf(predicate);
     }
-    public Todo findById(int id){
-        Predicate<? super Todo>predicate = todo -> todo.getId() == id;
-        Todo todo = todos.stream().filter(predicate).findFirst().get();
-        return todo;
+    public Todo findById(int id) {
+        return todos.stream()
+                .filter(todo -> todo.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Todo not found for id: " + id));
     }
+
 }
