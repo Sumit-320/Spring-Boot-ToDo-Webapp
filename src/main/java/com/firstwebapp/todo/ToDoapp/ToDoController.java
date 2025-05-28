@@ -1,5 +1,7 @@
 package com.firstwebapp.todo.ToDoapp;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,11 +25,13 @@ public class ToDoController {
 
     @RequestMapping("list-todos")
     public String ListAllToDos(ModelMap model) {
-        String username = (String)model.get("name");
+        String username = getLoggedinUsername(model);
         List<Todo> todos = todoService.findByUsername(username);
         model.put("todos", todos);
         return "listToDos";
     }
+
+    
 
     @RequestMapping(value = "add-todo", method = RequestMethod.GET)
     public String showAddToDoPage(Model model) {
@@ -38,7 +42,7 @@ public class ToDoController {
 
     @RequestMapping(value = "add-todo", method = RequestMethod.POST)
     public String AddToDoPage(@ModelAttribute("todo") Todo todo, ModelMap model) {
-        todoService.addToDo((String) model.get("name"), todo.getDescription(), todo.getTargetdate(), todo.isDone());
+        todoService.addToDo(getLoggedinUsername(model), todo.getDescription(), todo.getTargetdate(), todo.isDone());
         return "redirect:list-todos";
     }
 
@@ -58,8 +62,13 @@ public class ToDoController {
 
     @RequestMapping(value = "update-todo", method = RequestMethod.POST)
     public String updateToDoPage(@ModelAttribute("todo") Todo todo, ModelMap model) {
-        String username = (String) model.get("name");
+        String username = getLoggedinUsername(model);
         todoService.updateToDo(todo.getId(), username, todo.getDescription(), todo.getTargetdate(), todo.isDone());
         return "redirect:list-todos";
+    }
+
+    private String getLoggedinUsername(ModelMap model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName(); // if there is no logged in user..it might return null
     }
 }

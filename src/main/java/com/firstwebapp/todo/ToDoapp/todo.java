@@ -1,7 +1,18 @@
 package com.firstwebapp.todo.ToDoapp;
 import java.time.LocalDate;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+// Bean -> Database
+
+// We are mapping a Bean to the Table in the Database
+@Entity(name="ToDoABC")
 public class Todo {
     // id-username-targetdate-username-done
+    @Id // primary key
+    @GeneratedValue
     private int id;
     private String username;
     private String description;
