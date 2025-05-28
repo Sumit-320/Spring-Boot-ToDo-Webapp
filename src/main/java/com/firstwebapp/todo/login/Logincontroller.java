@@ -19,6 +19,7 @@ public class Logincontroller {
         this.authenticationService = authenticationService;
      }
 
+     
     @RequestMapping(value="login",method = RequestMethod.GET)
     public String goToLoginPage() {
         return "login";

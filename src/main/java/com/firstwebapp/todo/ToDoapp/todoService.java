@@ -42,5 +42,4 @@ public class TodoService {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Todo not found for id: " + id));
     }
-
 }

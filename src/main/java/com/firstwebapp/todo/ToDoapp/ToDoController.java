@@ -23,7 +23,8 @@ public class ToDoController {
 
     @RequestMapping("list-todos")
     public String ListAllToDos(ModelMap model) {
-        List<Todo> todos = todoService.findByUsername("razor");
+        String username = (String)model.get("name");
+        List<Todo> todos = todoService.findByUsername(username);
         model.put("todos", todos);
         return "listToDos";
     }

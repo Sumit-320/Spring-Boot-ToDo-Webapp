@@ -91,7 +91,6 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Description</th>
                         <th>Target Date</th>
                         <th>Completed?</th>
@@ -100,7 +99,6 @@
                 </thead>
                 <tbody>
                     <tr th:each="todo : ${todos}">
-                        <td th:text="${todo.id}"></td>
                         <td th:text="${todo.description}"></td>
                         <td th:text="${todo.targetdate}"></td>
                         <td th:text="${todo.done}"></td>
